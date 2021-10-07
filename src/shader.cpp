@@ -1,7 +1,7 @@
 #include "shader.h"
 
 
-namespace OpenGLUtil {
+namespace Graphics {
 
 
 
