@@ -44,6 +44,7 @@ find_package(GLEW REQUIRED)
 
 set(SOURCE_FILES
     src/main.cpp
+    src/window.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
