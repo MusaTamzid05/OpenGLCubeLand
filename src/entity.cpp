@@ -1,11 +1,26 @@
 #include "entity.h"
 #include "stb_image.h"
+#include "shader.h"
+#include "const.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 
 namespace Graphics {
+
+    Mesh::Mesh(const std::string& texture_path) {
+
+        if(texture_path != "") 
+            if(!load_texture(texture_path))
+                std::cerr << "Could not load " << texture_path << "\n";
+    }
+
 
     bool Mesh::load_texture(const std::string& texture_path) {
 		glGenTextures(1, &texture_id);
@@ -31,5 +46,29 @@ namespace Graphics {
         return true;
 
     }
+
+
+    Entity::Entity(Shader* shader, Mesh* mesh):m_shader(shader), m_mesh(mesh) {}
+
+
+    void Entity::load_shader_defaults() {
+
+        if(m_shader == nullptr) {
+            std::cerr << "No shader loaded yet.";
+            return;
+        }
+
+        glm::mat4 view = glm::mat4(1.0f); 
+        glm::mat4 projection    = glm::mat4(1.0f);
+        projection = glm::perspective(glm::radians(45.0f), (float)Const::WIDTH/ (float)Const::HEIGHT, 0.1f, 100.0f);
+        view       = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        
+        m_shader->setMat4("projection", projection); 
+        m_shader->setMat4("view", view);
+
+
+    }
+
+
 
 }

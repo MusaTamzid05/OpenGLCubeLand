@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "stb_image.h"
+#include "shader.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,7 +12,7 @@
 #include <iostream>
 
 namespace Cube {
-    Mesh::Mesh(const std::string& texture_path):Graphics::Mesh() {
+    Mesh::Mesh(const std::string& texture_path):Graphics::Mesh(texture_path) {
 		float vertices[] = {
 				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 				 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -80,9 +81,7 @@ namespace Cube {
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 			glEnableVertexAttribArray(1);
 
-            if(texture_path != "") 
-                if(!load_texture(texture_path))
-                    std::cerr << "Could not load " << texture_path << "\n";
+
 
 
 
@@ -95,5 +94,22 @@ namespace Cube {
 
           glDrawArrays(GL_TRIANGLES, 0, 36);
     }
+
+    Cube::Cube() {
+        m_mesh = new Mesh("../textures/container.jpg");
+        m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
+        load_shader_defaults();
+
+        m_shader->use();
+        m_shader->setInt("texture_id", m_mesh->texture_id);
+
+
+    }
+
+    void Cube::draw() {
+        m_shader->use();
+        m_mesh->draw();
+    }
+
 }
 

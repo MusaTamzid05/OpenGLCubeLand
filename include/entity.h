@@ -8,7 +8,7 @@ namespace Graphics {
 
     class Mesh {
         public:
-            Mesh(const std::string& texture_path = "") {}
+            Mesh(const std::string& texture_path = "");
             virtual void draw() = 0;
 
             virtual bool load_texture(const std::string& texture_path);
@@ -21,11 +21,11 @@ namespace Graphics {
 
     class Entity {
         public:
-            Entity(Shader* shader, Mesh* mesh);;
+            Entity(Shader* shader = nullptr, Mesh* mesh = nullptr);
+            virtual void load_shader_defaults();
 
             virtual void draw() = 0;
 
-        protected:
             Shader* m_shader;
             Mesh* m_mesh;
 

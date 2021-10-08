@@ -5,11 +5,19 @@
 #include <string>
 
 namespace Cube {
-    class Mesh : Graphics::Mesh {
+    class Mesh : public  Graphics::Mesh {
         public:
             Mesh(const std::string& texture_path);
             void draw();
     };
+
+
+    class Cube : public Graphics::Entity {
+        public:
+            Cube();
+            void draw();
+    };
+
 
 };
 
