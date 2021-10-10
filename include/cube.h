@@ -14,7 +14,7 @@ namespace Cube {
 
     class Cube : public Graphics::Entity {
         public:
-            Cube();
+            Cube(const glm::vec3& pos);
             void draw();
     };
 

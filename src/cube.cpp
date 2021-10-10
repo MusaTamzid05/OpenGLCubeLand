@@ -97,10 +97,10 @@ namespace Cube {
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    Cube::Cube() {
+    Cube::Cube(const glm::vec3& pos) {
         m_mesh = new Mesh("../textures/container.jpg");
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
-        load_shader_defaults();
+        load_shader_defaults(pos);
 
         m_shader->use();
         m_shader->setInt("texture_id", m_mesh->texture_id);

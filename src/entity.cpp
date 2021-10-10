@@ -19,11 +19,6 @@ namespace Graphics {
 
     Mesh::Mesh(const std::string& texture_path):texture_id(0) {
 
-        /*
-        if(texture_path != "") 
-            if(!load_texture(texture_path))
-                std::cerr << "Could not load " << texture_path << "\n";
-                */
     }
 
 
@@ -59,17 +54,16 @@ namespace Graphics {
     }
 
 
-    Entity::Entity(Shader* shader, Mesh* mesh):m_shader(shader), m_mesh(mesh) {}
+    Entity::Entity(Shader* shader, Mesh* mesh, const  glm::vec3 pos):m_shader(shader), m_mesh(mesh) {}
 
 
-    void Entity::load_shader_defaults() {
+    void Entity::load_shader_defaults(const glm::vec3 pos) {
 
         if(m_shader == nullptr) {
             std::cerr << "No shader loaded yet.";
             return;
         }
 
-        glm::vec3 default_pos = glm::vec3(0.0f, 0.0f, 0.0f);
 
 
         m_shader->use();
@@ -83,7 +77,7 @@ namespace Graphics {
         m_shader->setMat4("view", view);
 
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, default_pos);
+        model = glm::translate(model, pos);
 
         m_shader->setMat4("model", model);
 

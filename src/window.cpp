@@ -23,7 +23,8 @@ namespace Graphics {
         window_loaded = true;
         glEnable(GL_DEPTH_TEST);
 
-        m_entities.push_back(new Cube::Cube());
+        m_entities.push_back(new Cube::Cube(glm::vec3(0.0, 0.0, 0.0)));
+        m_entities.push_back(new Cube::Cube(glm::vec3(-1.0, 0.0, 0.0)));
 
     }
 
