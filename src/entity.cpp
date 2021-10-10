@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "camera.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -84,6 +85,25 @@ namespace Graphics {
 
     }
 
+    void Entity::update(Camera* camera) {
+        update_camera_view(camera);
+
+    }
+
+    void Entity::update_camera_view(Camera* camera) {
+        glm::mat4 projection = glm::perspective(glm::radians(camera->Zoom),
+                (float)Const::WIDTH / (float)Const::HEIGHT,
+                 0.1f,
+                 100.0f);
+
+        glm::mat4 view = camera->GetViewMatrix();
+
+        m_shader->use();
+
+        m_shader->setMat4("projection", projection);
+        m_shader->setMat4("view", view);
+
+    }
 
 
 }

@@ -6,6 +6,7 @@
 
 namespace Graphics {
     class Shader;
+    class Camera;
 
     class Mesh {
         public:
@@ -28,9 +29,12 @@ namespace Graphics {
             virtual void load_shader_defaults(const glm::vec3 pos);
 
             virtual void draw() = 0;
+            virtual void update(Camera* camera);
 
             Shader* m_shader;
             Mesh* m_mesh;
+
+            void update_camera_view(Camera* camera);
 
     };
 }

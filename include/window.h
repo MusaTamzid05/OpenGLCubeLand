@@ -7,8 +7,11 @@
 #include <GLFW/glfw3.h>
 
 
+
+
 namespace Graphics { 
     class Entity;
+    class Camera;
 
     class Window  {
         public:
@@ -29,6 +32,7 @@ namespace Graphics {
 
             void handle_input();
             void update();
+            void update_fps();
 
 
 
@@ -39,8 +43,20 @@ namespace Graphics {
             GLFWwindow* m_window;
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+            static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+            static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
             std::vector<Entity*> m_entities;
+            static Camera* m_camera;
+
+
+            static float last_x;
+            static float last_y;
+            static bool first_mouse;
+
+            float delta_time;
+            float last_frame;
+
     };
 
 }

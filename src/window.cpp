@@ -1,5 +1,7 @@
 #include "window.h"
 #include "cube.h"
+#include "const.h"
+#include "camera.h"
 
 
 #include <glad/glad.h>
@@ -8,11 +10,17 @@
 
 namespace Graphics {
 
+    bool Window::first_mouse = true;
+    float Window::last_x = Const::WIDTH / 2;
+    float Window::last_y = Const::HEIGHT / 2;
+    Camera* Window::m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
     Window::Window(
         int width,
         int height,
         const std::string& title 
-        ):width(width), height(height), window_loaded(false) {
+        ):width(width), height(height), window_loaded(false), 
+    delta_time(0.0f), last_frame(0.0) {
 
         init_lib();
 
@@ -51,6 +59,10 @@ namespace Graphics {
 
 		glfwMakeContextCurrent(m_window);
 		glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
+        glfwSetCursorPosCallback(m_window, mouse_callback);
+        glfwSetScrollCallback(m_window, scroll_callback);
+
+        glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
@@ -88,15 +100,60 @@ namespace Graphics {
     void Window::handle_input() {
 		if(glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(m_window, true);
+
+        if(glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(FORWARD, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(BACKWARD, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(LEFT, delta_time);
+
+        if(glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS)
+            m_camera->ProcessKeyboard(RIGHT, delta_time);
+
+
     }
 
     void Window::update() {
+        update_fps();
+
+        for(Entity* entity : m_entities)
+            entity->update(m_camera);
+
         glfwSwapBuffers(m_window);
         glfwPollEvents();
 
     }
 
+    void Window::update_fps() {
+        float current_frame = glfwGetTime();
+        delta_time = current_frame - last_frame;
+        last_frame = current_frame;
+    }
+
     void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         glViewport(0, 0, width, height);
+    }
+
+    void Window::mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+        if(first_mouse) {
+            last_x = xpos;
+            last_y = ypos;
+            first_mouse = false;
+        }
+
+        float xoffset = xpos - last_x;
+        float yoffset = last_y - ypos;
+
+        last_x = xpos;
+        last_y = ypos;
+
+        m_camera->ProcessMouseMovement(xoffset, yoffset);
+    }
+
+    void Window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+        m_camera->ProcessMouseScroll(yoffset);
     }
 }
