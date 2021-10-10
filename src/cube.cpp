@@ -82,17 +82,19 @@ namespace Cube {
 			glEnableVertexAttribArray(1);
 
 
-
+            if(!load_texture(texture_path)) {
+                std::cerr << "Could not load " << texture_path << "\n";
+                return;
+            }
 
 
     }
 
     void Mesh::draw() {
-          glActiveTexture(GL_TEXTURE0);
-          glBindTexture(GL_TEXTURE_2D, texture_id);
-
-
-          glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(VAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture_id);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
     Cube::Cube() {
@@ -102,6 +104,7 @@ namespace Cube {
 
         m_shader->use();
         m_shader->setInt("texture_id", m_mesh->texture_id);
+
 
 
     }

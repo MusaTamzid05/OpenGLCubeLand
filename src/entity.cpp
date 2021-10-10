@@ -1,5 +1,8 @@
 #include "entity.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
 #include "shader.h"
 #include "const.h"
 
@@ -14,15 +17,18 @@
 
 namespace Graphics {
 
-    Mesh::Mesh(const std::string& texture_path) {
+    Mesh::Mesh(const std::string& texture_path):texture_id(0) {
 
+        /*
         if(texture_path != "") 
             if(!load_texture(texture_path))
                 std::cerr << "Could not load " << texture_path << "\n";
+                */
     }
 
 
     bool Mesh::load_texture(const std::string& texture_path) {
+        std::cout << "Current texture id " << texture_id << "\n";
 		glGenTextures(1, &texture_id);
 		glBindTexture(GL_TEXTURE_2D, texture_id);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -42,7 +48,12 @@ namespace Graphics {
 			std::cout << "Failed to load texture" << std::endl;
             return false;
 		}
+        std::cout << "texture loaded.\n";
+
 		stbi_image_free(data);
+
+
+        std::cout << "After texture id " << texture_id << "\n";
         return true;
 
     }
@@ -58,6 +69,11 @@ namespace Graphics {
             return;
         }
 
+        glm::vec3 default_pos = glm::vec3(0.0f, 0.0f, 0.0f);
+
+
+        m_shader->use();
+
         glm::mat4 view = glm::mat4(1.0f); 
         glm::mat4 projection    = glm::mat4(1.0f);
         projection = glm::perspective(glm::radians(45.0f), (float)Const::WIDTH/ (float)Const::HEIGHT, 0.1f, 100.0f);
@@ -65,6 +81,11 @@ namespace Graphics {
         
         m_shader->setMat4("projection", projection); 
         m_shader->setMat4("view", view);
+
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, default_pos);
+
+        m_shader->setMat4("model", model);
 
 
     }

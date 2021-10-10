@@ -1,4 +1,5 @@
 #include "window.h"
+#include "cube.h"
 
 
 #include <glad/glad.h>
@@ -20,7 +21,9 @@ namespace Graphics {
             return;
         }
         window_loaded = true;
+        glEnable(GL_DEPTH_TEST);
 
+        m_entities.push_back(new Cube::Cube());
 
     }
 
@@ -66,9 +69,19 @@ namespace Graphics {
 
         while(!glfwWindowShouldClose(m_window)) {
             handle_input();
+            render();
             update();
 
         }
+    }
+
+    void Window::render() {
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        for(Entity* enity : m_entities)
+            enity->draw();
+
     }
 
     void Window::handle_input() {
