@@ -97,8 +97,8 @@ namespace Cube {
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    Cube::Cube(const glm::vec3& pos) {
-        m_mesh = new Mesh("../textures/container.jpg");
+    Cube::Cube(const glm::vec3& pos, const std::string& texture_path) {
+        m_mesh = new Mesh(texture_path);
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
         load_shader_defaults(pos);
 

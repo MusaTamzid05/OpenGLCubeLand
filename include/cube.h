@@ -14,7 +14,7 @@ namespace Cube {
 
     class Cube : public Graphics::Entity {
         public:
-            Cube(const glm::vec3& pos);
+            Cube(const glm::vec3& pos, const std::string& texture_path = "../textures/container.jpg");
             void draw();
     };
 

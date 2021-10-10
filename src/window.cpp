@@ -24,7 +24,7 @@ namespace Graphics {
         glEnable(GL_DEPTH_TEST);
 
         m_entities.push_back(new Cube::Cube(glm::vec3(0.0, 0.0, 0.0)));
-        m_entities.push_back(new Cube::Cube(glm::vec3(-1.0, 0.0, 0.0)));
+        m_entities.push_back(new Cube::Cube(glm::vec3(-1.0, 0.0, 0.0), "../textures/bricks2.jpg"));
 
     }
 
