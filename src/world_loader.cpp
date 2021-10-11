@@ -2,8 +2,9 @@
 
 namespace Graphics {
 
-	std::ostream& operator<<(std::ostream& os, const Position& pos) {
-		os << "x_axis : " << pos.x_axis << " z_axis : " <<  pos.z_axis;
+	std::ostream& operator<<(std::ostream& os, const CubeData& cube_data) {
+        
+		os << "Texture type : " << cube_data.texture_type << " x_axis : " << cube_data.x_axis <<  " y_axis : " << cube_data.y_axis <<  " z_axis : " <<  cube_data.z_axis;
 		return os;
 	}
 
@@ -26,25 +27,24 @@ namespace Graphics {
 
 	}
 
-	std::vector<Position> WorldLoader::run() const {
+	std::vector<CubeData> WorldLoader::run() const {
 		int z_axis = 0;
-		std::vector<Position> positions;
+		std::vector<CubeData> cube_data;
 
 		for(unsigned int z_axis = 0;  z_axis < lines.size(); z_axis += 1) {
 			std::string line = lines[z_axis];
-			for(unsigned int x_axis  = 0; x_axis < line.size(); x_axis  += 1) {
+			for(unsigned int x_axis  = 0; x_axis < line.size(); x_axis  += 2) {
 				if(line[x_axis] == ' ')
 					continue;
 
                 int cube_count = line[x_axis] - '0';
-                std::cout << "cube count : " << cube_count << "\n";
                 for(unsigned int i = 0; i < cube_count; i += 1)
-                    positions.push_back(Position(x_axis, i,  z_axis));
+                    cube_data.push_back(CubeData(x_axis, i,  z_axis, line[x_axis + 1]));
 
 			}
 		}
 
-		return positions;
+		return cube_data;
 	}
 
 }
