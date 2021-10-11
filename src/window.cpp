@@ -3,6 +3,7 @@
 #include "const.h"
 #include "camera.h"
 #include "world_loader.h"
+#include "texture_mapper.h"
 
 
 #include <glad/glad.h>
@@ -36,8 +37,17 @@ namespace Graphics {
 
         load_world(map_path);
 
+        TextureMapper* texture_mapper = new TextureMapper();
+
         for(CubeData data : cube_data)
-            m_entities.push_back(new Cube::Cube(glm::vec3(data.x_axis, data.y_axis, data.z_axis)));
+            m_entities.push_back(new Cube::Cube(
+                        glm::vec3(
+                            data.x_axis,
+                            data.y_axis,
+                            data.z_axis),
+                        texture_mapper->map(data.texture_type)
+
+                        ));
 
 
     }

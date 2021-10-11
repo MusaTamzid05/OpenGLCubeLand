@@ -48,6 +48,7 @@ set(SOURCE_FILES
     src/entity.cpp
     src/cube.cpp
     src/world_loader.cpp
+    src/texture_mapper.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
