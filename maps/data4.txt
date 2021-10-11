@@ -1,5 +1,0 @@
-1A2A3B4A5B
-  1A3A4A4A
-    BA2B3A
-      1B2A
-        1A
