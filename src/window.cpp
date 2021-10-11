@@ -36,8 +36,8 @@ namespace Graphics {
 
         load_world(map_path);
 
-        for(Position position : positions)
-            m_entities.push_back(new Cube::Cube(glm::vec3(position.x_axis, position.y_axis, position.z_axis)));
+        for(CubeData data : cube_data)
+            m_entities.push_back(new Cube::Cube(glm::vec3(data.x_axis, data.y_axis, data.z_axis)));
 
 
     }
@@ -82,7 +82,7 @@ namespace Graphics {
 
     void Window::load_world(const std::string& map_path) {
         WorldLoader* m_world_loader = new WorldLoader(map_path);
-        positions = m_world_loader->run();
+        cube_data = m_world_loader->run();
     }
 
     void Window::run() {

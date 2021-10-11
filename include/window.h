@@ -60,7 +60,7 @@ namespace Graphics {
             float delta_time;
             float last_frame;
 
-            std::vector<Position> positions;
+            std::vector<CubeData> cube_data;
 
 
     };

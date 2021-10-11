@@ -33,13 +33,18 @@ namespace Graphics {
 
 		for(unsigned int z_axis = 0;  z_axis < lines.size(); z_axis += 1) {
 			std::string line = lines[z_axis];
-			for(unsigned int x_axis  = 0; x_axis < line.size(); x_axis  += 2) {
-				if(line[x_axis] == ' ')
+            int x_axis = 0;
+			for(unsigned int col = 0; col < line.size(); col += 2) {
+                if(line[col] == ' ') {
+                    x_axis += 1;
 					continue;
+                }
 
-                int cube_count = line[x_axis] - '0';
-                for(unsigned int i = 0; i < cube_count; i += 1)
-                    cube_data.push_back(CubeData(x_axis, i,  z_axis, line[x_axis + 1]));
+                int cube_count = line[col] - '0';
+                for(unsigned int i = 0; i < cube_count; i += 1) 
+                    cube_data.push_back(CubeData(x_axis, i,  z_axis, line[col+ 1]));
+
+                x_axis += 1;
 
 			}
 		}
