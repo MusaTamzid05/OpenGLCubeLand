@@ -47,6 +47,7 @@ set(SOURCE_FILES
     src/window.cpp
     src/entity.cpp
     src/cube.cpp
+    src/world_loader.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

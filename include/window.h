@@ -6,16 +6,18 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-
+#include "world_loader.h"
 
 
 namespace Graphics { 
     class Entity;
     class Camera;
 
+
     class Window  {
         public:
             Window(
+                const std::string& map_path,
                 int width = 640,
                 int height = 480,
                 const std::string& title = "Window"
@@ -29,6 +31,7 @@ namespace Graphics {
         private:
             void init_lib() const;
             bool init_window(const std::string& title);
+            void load_world(const std::string& map_path);
 
             void handle_input();
             void update();
@@ -56,6 +59,9 @@ namespace Graphics {
 
             float delta_time;
             float last_frame;
+
+            std::vector<Position> positions;
+
 
     };
 

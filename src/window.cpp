@@ -2,6 +2,7 @@
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
+#include "world_loader.h"
 
 
 #include <glad/glad.h>
@@ -16,6 +17,7 @@ namespace Graphics {
     Camera* Window::m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     Window::Window(
+        const std::string& map_path,
         int width,
         int height,
         const std::string& title 
@@ -28,8 +30,11 @@ namespace Graphics {
             std::cerr << "Could not load window.\n";
             return;
         }
+
         window_loaded = true;
         glEnable(GL_DEPTH_TEST);
+
+        load_world(map_path);
 
         m_entities.push_back(new Cube::Cube(glm::vec3(0.0, 0.0, 0.0)));
         m_entities.push_back(new Cube::Cube(glm::vec3(0.0, 0.0, -1.0)));
@@ -74,6 +79,14 @@ namespace Graphics {
 
         return true;
 
+    }
+
+    void Window::load_world(const std::string& map_path) {
+        WorldLoader* m_world_loader = new WorldLoader(map_path);
+        positions = m_world_loader->run();
+
+        for(Position pos : positions) 
+            std::cout << pos << "\n";
     }
 
     void Window::run() {
