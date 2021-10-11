@@ -83,9 +83,6 @@ namespace Graphics {
     void Window::load_world(const std::string& map_path) {
         WorldLoader* m_world_loader = new WorldLoader(map_path);
         positions = m_world_loader->run();
-
-        for(Position pos : positions) 
-            std::cout << pos << "\n";
     }
 
     void Window::run() {
