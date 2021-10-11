@@ -10,8 +10,14 @@
 namespace Graphics {
 
 	struct Position {
-		Position(int x_axis, int z_axis):x_axis(x_axis),z_axis(z_axis) {}
+		Position(int x_axis, int y_axis,  int z_axis):
+            x_axis(x_axis),
+            y_axis(y_axis),
+            z_axis(z_axis) {}
+
+
 		int x_axis;
+		int y_axis;
 		int z_axis;
 	};
 

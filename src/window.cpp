@@ -37,7 +37,7 @@ namespace Graphics {
         load_world(map_path);
 
         for(Position position : positions)
-            m_entities.push_back(new Cube::Cube(glm::vec3(position.x_axis, 0, position.z_axis)));
+            m_entities.push_back(new Cube::Cube(glm::vec3(position.x_axis, position.y_axis, position.z_axis)));
 
 
     }

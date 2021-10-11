@@ -35,7 +35,11 @@ namespace Graphics {
 			for(unsigned int x_axis  = 0; x_axis < line.size(); x_axis  += 1) {
 				if(line[x_axis] == ' ')
 					continue;
-				positions.push_back(Position(x_axis, z_axis));
+
+                int cube_count = line[x_axis] - '0';
+                std::cout << "cube count : " << cube_count << "\n";
+                for(unsigned int i = 0; i < cube_count; i += 1)
+                    positions.push_back(Position(x_axis, i,  z_axis));
 
 			}
 		}
