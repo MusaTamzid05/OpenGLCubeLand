@@ -27,12 +27,9 @@ namespace Graphics {
 	std::ostream& operator<<(std::ostream& os, const CubeData& cube_data);
 
 	struct WorldLoader {
-		WorldLoader(const std::string& path);
-		void read_from(const std::string& path);
 
-		std::vector<CubeData> run() const;
+		virtual std::vector<CubeData> run() const = 0;
 
-		std::vector<std::string> lines;
 
 	};
 

@@ -2,7 +2,7 @@
 #include "cube.h"
 #include "const.h"
 #include "camera.h"
-#include "world_loader.h"
+#include "file_world_loader.h"
 #include "texture_mapper.h"
 
 
@@ -91,7 +91,7 @@ namespace Graphics {
     }
 
     void Window::load_world(const std::string& map_path) {
-        WorldLoader* m_world_loader = new WorldLoader(map_path);
+        FileWorldLoader * m_world_loader = new FileWorldLoader(map_path);
         cube_data = m_world_loader->run();
     }
 
