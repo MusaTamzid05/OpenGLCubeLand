@@ -24,7 +24,6 @@ namespace Graphics {
 
 
     bool Mesh::load_texture(const std::string& texture_path) {
-        std::cout << "Current texture id " << texture_id << "\n";
 		glGenTextures(1, &texture_id);
 		glBindTexture(GL_TEXTURE_2D, texture_id);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -44,12 +43,10 @@ namespace Graphics {
 			std::cout << "Failed to load texture" << std::endl;
             return false;
 		}
-        std::cout << "texture loaded.\n";
 
 		stbi_image_free(data);
 
 
-        std::cout << "After texture id " << texture_id << "\n";
         return true;
 
     }

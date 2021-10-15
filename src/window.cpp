@@ -3,6 +3,7 @@
 #include "const.h"
 #include "camera.h"
 #include "file_world_loader.h"
+#include "perlin_world_loader.h"
 #include "texture_mapper.h"
 
 
@@ -91,7 +92,7 @@ namespace Graphics {
     }
 
     void Window::load_world(const std::string& map_path) {
-        FileWorldLoader * m_world_loader = new FileWorldLoader(map_path);
+        WorldLoader* m_world_loader = new PerlinWorldLoader();
         cube_data = m_world_loader->run();
     }
 
