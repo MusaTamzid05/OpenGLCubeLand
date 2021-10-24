@@ -48,6 +48,8 @@ namespace Graphics {
                         Factory::TextureFactory::Type::Container
                         ));
 
+        std::cout << "Total entities : " << m_entities.size() << "\n";
+
 
     }
 
