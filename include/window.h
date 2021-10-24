@@ -17,9 +17,12 @@ namespace Graphics {
     class Window  {
         public:
             Window(
-                int width = 640,
-                int height = 480,
-                const std::string& title = "Window"
+                    int x_axis,
+                    int z_axis,
+                    int width = 640,
+                    int height = 480,
+                    const std::string& title = "Window"
+
                     );
 
             virtual ~Window();
@@ -30,7 +33,7 @@ namespace Graphics {
         private:
             void init_lib() const;
             bool init_window(const std::string& title);
-            void load_world();
+            void load_world(int x_axis, int z_axis);
 
             void handle_input();
             void update();

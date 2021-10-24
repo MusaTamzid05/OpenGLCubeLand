@@ -18,6 +18,8 @@ namespace Graphics {
     Camera* Window::m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     Window::Window(
+        int x_axis,
+        int z_axis,
         int width,
         int height,
         const std::string& title 
@@ -34,7 +36,7 @@ namespace Graphics {
         window_loaded = true;
         glEnable(GL_DEPTH_TEST);
 
-        load_world();
+        load_world(x_axis, z_axis);
 
 
         for(CubeData data : cube_data)
@@ -87,8 +89,8 @@ namespace Graphics {
 
     }
 
-    void Window::load_world() {
-        WorldLoader* m_world_loader = new PerlinWorldLoader();
+    void Window::load_world(int x_axis, int z_axis) {
+        WorldLoader* m_world_loader = new PerlinWorldLoader(x_axis, z_axis);
         cube_data = m_world_loader->run();
     }
 
