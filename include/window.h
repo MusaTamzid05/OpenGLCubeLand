@@ -17,7 +17,6 @@ namespace Graphics {
     class Window  {
         public:
             Window(
-                const std::string& map_path,
                 int width = 640,
                 int height = 480,
                 const std::string& title = "Window"
@@ -31,7 +30,7 @@ namespace Graphics {
         private:
             void init_lib() const;
             bool init_window(const std::string& title);
-            void load_world(const std::string& map_path);
+            void load_world();
 
             void handle_input();
             void update();

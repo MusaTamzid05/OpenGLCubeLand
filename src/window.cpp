@@ -19,7 +19,6 @@ namespace Graphics {
     Camera* Window::m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
     Window::Window(
-        const std::string& map_path,
         int width,
         int height,
         const std::string& title 
@@ -36,7 +35,7 @@ namespace Graphics {
         window_loaded = true;
         glEnable(GL_DEPTH_TEST);
 
-        load_world(map_path);
+        load_world();
 
         TextureMapper* texture_mapper = new TextureMapper();
 
@@ -91,7 +90,7 @@ namespace Graphics {
 
     }
 
-    void Window::load_world(const std::string& map_path) {
+    void Window::load_world() {
         WorldLoader* m_world_loader = new PerlinWorldLoader();
         cube_data = m_world_loader->run();
     }
