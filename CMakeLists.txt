@@ -51,6 +51,7 @@ set(SOURCE_FILES
     src/texture_mapper.cpp
     src/file_world_loader.cpp
     src/perlin_world_loader.cpp
+    src/mesh_factory.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
