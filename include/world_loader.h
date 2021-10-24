@@ -6,11 +6,13 @@
 #include <iostream>
 #include <vector>
 
+#include "texture_factory.h"
+
 
 namespace Graphics {
 
 	struct CubeData {
-		CubeData(int x_axis, int y_axis,  int z_axis, char texture_type):
+		CubeData(int x_axis, int y_axis,  int z_axis, const  Factory::TextureFactory::Type& texture_type):
             x_axis(x_axis),
             y_axis(y_axis),
             z_axis(z_axis),
@@ -21,7 +23,7 @@ namespace Graphics {
 		int x_axis;
 		int y_axis;
 		int z_axis;
-        char texture_type;
+        Factory::TextureFactory::Type texture_type;
 	};
 
 	std::ostream& operator<<(std::ostream& os, const CubeData& cube_data);

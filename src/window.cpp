@@ -45,7 +45,7 @@ namespace Graphics {
                             data.x_axis,
                             data.y_axis,
                             data.z_axis),
-                        Factory::TextureFactory::Type::Container
+                        data.texture_type
                         ));
 
         std::cout << "Total entities : " << m_entities.size() << "\n";

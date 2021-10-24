@@ -36,7 +36,7 @@ namespace Graphics {
 
                 int cube_count = line[col] - '0';
                 for(unsigned int i = 0; i < cube_count; i += 1) 
-                    cube_data.push_back(CubeData(x_axis, i,  z_axis, line[col+ 1]));
+                    throw std::runtime_error("Not implenmented");
 
                 x_axis += 1;
 
