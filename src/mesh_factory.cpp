@@ -1,6 +1,7 @@
 #include "mesh_factory.h"
 #include "entity.h"
 #include "cube.h"
+#include <iostream>
 
 namespace Factory {
     MeshFactory* MeshFactory::m_instance = nullptr;

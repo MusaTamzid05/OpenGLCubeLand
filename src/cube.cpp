@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "stb_image.h"
 #include "shader.h"
+#include "mesh_factory.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -98,7 +99,8 @@ namespace Cube {
     }
 
     Cube::Cube(const glm::vec3& pos, const std::string& texture_path) {
-        m_mesh = new Mesh(texture_path);
+        //m_mesh = new Mesh(texture_path);
+        m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshFactory::Type::Cube);
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
         load_shader_defaults(pos);
 
