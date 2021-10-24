@@ -48,10 +48,10 @@ set(SOURCE_FILES
     src/entity.cpp
     src/cube.cpp
     src/world_loader.cpp
-    src/texture_mapper.cpp
     src/file_world_loader.cpp
     src/perlin_world_loader.cpp
     src/mesh_factory.cpp
+    src/texture_factory.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})

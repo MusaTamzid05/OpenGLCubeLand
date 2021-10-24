@@ -10,14 +10,12 @@ namespace Graphics {
 
     class Mesh {
         public:
-            Mesh(const std::string& texture_path = "");
-            virtual void draw() = 0;
+            Mesh();
+            virtual void draw(unsigned int texture_id) = 0;
 
-            virtual bool load_texture(const std::string& texture_path);
 
             unsigned int VAO;
             unsigned int VBO;
-            unsigned int texture_id;
 
     };
 

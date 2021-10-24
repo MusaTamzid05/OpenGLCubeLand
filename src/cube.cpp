@@ -13,7 +13,7 @@
 #include <iostream>
 
 namespace Cube {
-    Mesh::Mesh(const std::string& texture_path):Graphics::Mesh(texture_path) {
+    Mesh::Mesh(const std::string& texture_path):Graphics::Mesh() {
 		float vertices[] = {
 				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 				 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -83,29 +83,25 @@ namespace Cube {
 			glEnableVertexAttribArray(1);
 
 
-            if(!load_texture(texture_path)) {
-                std::cerr << "Could not load " << texture_path << "\n";
-                return;
-            }
 
 
     }
 
-    void Mesh::draw() {
+    void Mesh::draw(unsigned int texture_id) {
         glBindVertexArray(VAO);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture_id);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    Cube::Cube(const glm::vec3& pos, const std::string& texture_path) {
-        //m_mesh = new Mesh(texture_path);
+    Cube::Cube(const glm::vec3& pos, const Factory::TextureFactory::Type& type):type(type) {
         m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshFactory::Type::Cube);
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
         load_shader_defaults(pos);
 
         m_shader->use();
-        m_shader->setInt("texture_id", m_mesh->texture_id);
+        texture_id = Factory::TextureFactory::get_instance()->get_texture(type);
+        m_shader->setInt("texture_id", texture_id);
 
 
 
@@ -113,7 +109,7 @@ namespace Cube {
 
     void Cube::draw() {
         m_shader->use();
-        m_mesh->draw();
+        m_mesh->draw(texture_id);
     }
 
 }

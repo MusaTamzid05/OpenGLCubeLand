@@ -4,7 +4,6 @@
 #include "camera.h"
 #include "file_world_loader.h"
 #include "perlin_world_loader.h"
-#include "texture_mapper.h"
 
 
 #include <glad/glad.h>
@@ -37,7 +36,6 @@ namespace Graphics {
 
         load_world();
 
-        TextureMapper* texture_mapper = new TextureMapper();
 
         for(CubeData data : cube_data)
             m_entities.push_back(new Cube::Cube(
@@ -45,8 +43,7 @@ namespace Graphics {
                             data.x_axis,
                             data.y_axis,
                             data.z_axis),
-                        texture_mapper->map(data.texture_type)
-
+                        Factory::TextureFactory::Type::Container
                         ));
 
 

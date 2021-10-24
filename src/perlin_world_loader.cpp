@@ -13,7 +13,6 @@ namespace Graphics {
         for(unsigned int x = 0; x < x_axis_max; x+= 1)
             for(unsigned int z = 0; z < z_axis_max; z+= 1) {
                 int cube_count = perlin2d(x, z, 0.1, 4) * 10;
-                std::cout << cube_count << "\n";
                 for(unsigned int  y_axis = 0; y_axis < cube_count ; y_axis += 1)
                     cube_data.push_back(CubeData(x, y_axis, z, 'B'));
             }
