@@ -2,18 +2,15 @@
 #define TEXTURE_FACTORY_H
 
 #include <map>
+#include "factory_type.h"
 
 namespace Factory {
 
     class TextureFactory {
         public:
 
-            enum Type {
-                Container,
-                Brick
-            };
 
-            unsigned int get_texture(const Type& type);
+            unsigned int get_texture(const TextureType& type);
 
             static TextureFactory* get_instance();
 
@@ -25,7 +22,7 @@ namespace Factory {
             void load_textures();
             unsigned int load_texture(const std::string& texture_path) const;
 
-            std::map<Type, unsigned int> texture_list;
+            std::map<TextureType, unsigned int> texture_list;
 
 
     };

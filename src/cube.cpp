@@ -83,7 +83,7 @@ namespace Cube {
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
-    Cube::Cube(const glm::vec3& pos, const Factory::TextureFactory::Type& type):type(type) {
+    Cube::Cube(const glm::vec3& pos, const Factory::TextureType& type):type(type) {
         m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshType::Cube);
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
         load_shader_defaults(pos);

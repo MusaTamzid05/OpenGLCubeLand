@@ -16,10 +16,10 @@ namespace Cube {
 
     class Cube : public Graphics::Entity {
         public:
-            Cube(const glm::vec3& pos, const Factory::TextureFactory::Type& = Factory::TextureFactory::Container);
+            Cube(const glm::vec3& pos, const Factory::TextureType& type  = Factory::TextureType::Container);
             void draw();
 
-            Factory::TextureFactory::Type type;
+            Factory::TextureType type;
 
             unsigned int texture_id;
     };

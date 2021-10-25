@@ -18,8 +18,8 @@ namespace Factory {
     }
 
     void TextureFactory::load_textures() {
-        texture_list.insert(std::pair<Type, unsigned int>(Container, load_texture("../textures/container.jpg")));
-        texture_list.insert(std::pair<Type, unsigned int>(Container, load_texture("../textures/bricks2.jpg")));
+        texture_list.insert(std::pair<TextureType, unsigned int>(Container, load_texture("../textures/container.jpg")));
+        texture_list.insert(std::pair<TextureType, unsigned int>(Container, load_texture("../textures/bricks2.jpg")));
 
     }
 
@@ -54,7 +54,7 @@ namespace Factory {
 
     }
 
-    unsigned int TextureFactory::get_texture(const Type& type) {
+    unsigned int TextureFactory::get_texture(const TextureType& type) {
         return texture_list[type];
     }
 
