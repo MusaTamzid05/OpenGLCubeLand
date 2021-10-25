@@ -33,6 +33,9 @@ namespace Graphics {
             Mesh* m_mesh;
 
             void update_camera_view(Camera* camera);
+            void update_pos();
+
+            glm::vec3 pos;
 
     };
 }

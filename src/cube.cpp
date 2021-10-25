@@ -5,10 +5,12 @@
 #include "stb_image.h"
 #include "shader.h"
 #include "mesh_factory.h"
+#include "shader_factory.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #include <iostream>
 
@@ -84,9 +86,9 @@ namespace Cube {
     }
 
     Cube::Cube(const glm::vec3& pos, const Factory::TextureType& type):type(type) {
+        this->pos = pos;
         m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshType::Cube);
-        m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
-        load_shader_defaults(pos);
+        m_shader = Factory::ShaderFactory::get_instance()->get_shader(Factory::ShaderType::CubeShader);
 
         m_shader->use();
         texture_id = Factory::TextureFactory::get_instance()->get_texture(type);
@@ -100,6 +102,7 @@ namespace Cube {
         m_shader->use();
         m_mesh->draw(texture_id);
     }
+
 
 }
 

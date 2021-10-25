@@ -54,7 +54,7 @@ namespace Graphics {
         glLinkProgram(ID);
         check_compile_error(ID , "PROGRAM");
 
-        //std::cout << "Program linked sucessfully.\n";
+        std::cout << "Program linked sucessfully.\n";
     }
 
 
@@ -74,7 +74,7 @@ namespace Graphics {
                 std::cerr << "Shader " << type << " compilation error :"<< ":" << infoLog << "\n";
                 exit(1);
             } else {
-                //std::cout << type << " compile successfully.\n";
+                std::cout << type << " compile successfully.\n";
 
             }
 

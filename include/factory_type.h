@@ -11,6 +11,10 @@ namespace Factory {
         Container,
         Brick
     };
+
+    enum ShaderType {
+        CubeShader
+    };
 }
 
 #endif

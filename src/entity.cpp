@@ -21,7 +21,7 @@ namespace Graphics {
     }
 
 
-    Entity::Entity(Shader* shader, Mesh* mesh, const  glm::vec3 pos):m_shader(shader), m_mesh(mesh) {}
+    Entity::Entity(Shader* shader, Mesh* mesh, const  glm::vec3 pos):m_shader(shader), m_mesh(mesh), pos(pos) {}
 
 
     void Entity::load_shader_defaults(const glm::vec3 pos) {
@@ -53,6 +53,7 @@ namespace Graphics {
 
     void Entity::update(Camera* camera) {
         update_camera_view(camera);
+        update_pos();
 
     }
 
@@ -68,6 +69,15 @@ namespace Graphics {
 
         m_shader->setMat4("projection", projection);
         m_shader->setMat4("view", view);
+
+    }
+
+    void Entity::update_pos() {
+        m_shader->use();
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, pos);
+        m_shader->setMat4("model", model);
+
 
     }
 

@@ -10,6 +10,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+
+#include <glm/gtx/string_cast.hpp>
+
 namespace Graphics {
 
     bool Window::first_mouse = true;
@@ -39,7 +42,7 @@ namespace Graphics {
         load_world(x_axis, z_axis);
 
 
-        for(CubeData data : cube_data)
+        for(CubeData data : cube_data) {
             m_entities.push_back(new Cube::Cube(
                         glm::vec3(
                             data.x_axis,
@@ -47,6 +50,8 @@ namespace Graphics {
                             data.z_axis),
                         data.texture_type
                         ));
+
+        }
 
         std::cout << "Total entities : " << m_entities.size() << "\n";
 
@@ -103,9 +108,26 @@ namespace Graphics {
         }
 
         while(!glfwWindowShouldClose(m_window)) {
+            /*
+            update();
             handle_input();
             render();
-            update();
+            */
+
+            update_fps();
+
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            for(Entity* entity : m_entities) {
+                entity->draw();
+                entity->update(m_camera);
+
+            }
+
+            handle_input();
+            glfwSwapBuffers(m_window);
+            glfwPollEvents();
 
         }
     }
@@ -144,8 +166,6 @@ namespace Graphics {
         for(Entity* entity : m_entities)
             entity->update(m_camera);
 
-        glfwSwapBuffers(m_window);
-        glfwPollEvents();
 
     }
 

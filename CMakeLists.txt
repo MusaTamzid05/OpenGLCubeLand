@@ -52,6 +52,7 @@ set(SOURCE_FILES
     src/perlin_world_loader.cpp
     src/mesh_factory.cpp
     src/texture_factory.cpp
+    src/shader_factory.cpp
     )
 
 add_executable(gl_play  ${SOURCE_FILES})
