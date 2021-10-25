@@ -108,20 +108,14 @@ namespace Graphics {
         }
 
         while(!glfwWindowShouldClose(m_window)) {
-            /*
-            update();
-            handle_input();
-            render();
-            */
-
             update_fps();
 
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             for(Entity* entity : m_entities) {
-                entity->draw();
-                entity->update(m_camera);
+                render(entity);
+                update(entity);
 
             }
 
@@ -132,13 +126,8 @@ namespace Graphics {
         }
     }
 
-    void Window::render() {
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        for(Entity* enity : m_entities)
-            enity->draw();
-
+    void Window::render(Entity* entity) {
+        entity->draw();
     }
 
     void Window::handle_input() {
@@ -160,13 +149,8 @@ namespace Graphics {
 
     }
 
-    void Window::update() {
-        update_fps();
-
-        for(Entity* entity : m_entities)
-            entity->update(m_camera);
-
-
+    void Window::update(Entity* entity) {
+        entity->update(m_camera);
     }
 
     void Window::update_fps() {

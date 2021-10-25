@@ -28,15 +28,15 @@ namespace Graphics {
             virtual ~Window();
 
             void run();
-            void render();
 
         private:
             void init_lib() const;
             bool init_window(const std::string& title);
             void load_world(int x_axis, int z_axis);
 
+            void render(Entity* entity);
             void handle_input();
-            void update();
+            void update(Entity* entity);
             void update_fps();
 
 
