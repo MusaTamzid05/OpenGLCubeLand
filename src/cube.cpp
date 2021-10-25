@@ -84,7 +84,7 @@ namespace Cube {
     }
 
     Cube::Cube(const glm::vec3& pos, const Factory::TextureFactory::Type& type):type(type) {
-        m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshFactory::Type::Cube);
+        m_mesh = Factory::MeshFactory::GetInstance()->get_mesh(Factory::MeshType::Cube);
         m_shader = new Graphics::Shader("../shaders/cube.vs", "../shaders/cube.fs");
         load_shader_defaults(pos);
 

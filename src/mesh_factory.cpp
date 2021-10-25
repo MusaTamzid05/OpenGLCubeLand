@@ -7,7 +7,7 @@ namespace Factory {
     MeshFactory* MeshFactory::m_instance = nullptr;
 
     MeshFactory::MeshFactory() {
-        mesh_list.insert(std::pair<Type, Graphics::Mesh*>(Type::Cube, new Cube::Mesh("../textures/container.jpg")));
+        mesh_list.insert(std::pair<MeshType, Graphics::Mesh*>(MeshType::Cube, new Cube::Mesh("../textures/container.jpg")));
 
     }
 
@@ -19,7 +19,7 @@ namespace Factory {
     }
 
 
-    Graphics::Mesh* MeshFactory::get_mesh(const Type& type) {
+    Graphics::Mesh* MeshFactory::get_mesh(const MeshType& type) {
         return mesh_list[type];
     }
 }
